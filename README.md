@@ -94,5 +94,51 @@ This scheduling algorithm is optimal if all the jobs/processes are available at 
 If the arrival time for processes are different, which means all the processes are not available in the ready queue at time 0, and some jobs arrive after some time, in such situation, sometimes process with short burst time have to wait for the current process's execution to finish, because in Non Pre-emptive SJF, on arrival of a process with short duration, the existing job/process's execution is not halted/stopped to execute the short job first.
 
 This leads to the problem of Starvation, where a shorter process has to wait for a long time until the current longer process gets executed. This happens if shorter jobs keep coming, but this can be solved using the concept of aging.
+# Round Robin Scheduling
+A fixed time is allotted to each process, called quantum, for execution.
+Once a process is executed for given time period that process is preemptied and other process executes for given time period.
+Context switching is used to save states of preemptied processes.
+# Multilevel Queue Scheduling
+Another class of scheduling algorithms has been created for situations in which processes are easily classified into different groups.
+
+For example: A common division is made between foreground(or interactive) processes and background (or batch) processes. These two types of processes have different response-time requirements, and so might have different scheduling needs. In addition, foreground processes may have priority over background processes.
+
+A multi-level queue scheduling algorithm partitions the ready queue into several separate queues. The processes are permanently assigned to one queue, generally based on some property of the process, such as memory size, process priority, or process type. Each queue has its own scheduling algorithm.
+
+For example: separate queues might be used for foreground and background processes. The foreground queue might be scheduled by Round Robin algorithm, while the background queue is scheduled by an FCFS algorithm.
+
+
+ 
+In addition, there must be scheduling among the queues, which is commonly implemented as fixed-priority preemptive scheduling. For example: The foreground queue may have absolute priority over the background queue.
+
+
+Let us consider an example of a multilevel queue-scheduling algorithm with five queues:
+
+System Processes
+Interactive Processes
+Interactive Editing Processes
+Batch Processes
+Student Processes
+Each queue has absolute priority over lower-priority queues. No process in the batch queue, for example, could run unless the queues for system processes, interactive processes, and interactive editing processes were all empty. If an interactive editing process entered the ready queue while a batch process was running, the batch process will be preempted.
+# Multilevel Feedback Queue Scheduling
+In a multilevel queue-scheduling algorithm, processes are permanently assigned to a queue on entry to the system. Processes do not move between queues. This setup has the advantage of low scheduling overhead, but the disadvantage of being inflexible.
+
+Multilevel feedback queue scheduling, however, allows a process to move between queues. The idea is to separate processes with different CPU-burst characteristics. If a process uses too much CPU time, it will be moved to a lower-priority queue. Similarly, a process that waits too long in a lower-priority queue may be moved to a higher-priority queue. This form of aging prevents starvation.
+
+Multi Level Feedback Scheduling Queues
+
+An example of a multilevel feedback queue can be seen in the below figure.
+
+
+ 
+
+In general, a multilevel feedback queue scheduler is defined by the following parameters:
+
+The number of queues.
+The scheduling algorithm for each queue.
+The method used to determine when to upgrade a process to a higher-priority queue.
+The method used to determine when to demote a process to a lower-priority queue.
+The method used to determine which queue a process will enter when that process needs service.
+The definition of a multilevel feedback queue scheduler makes it the most general CPU-scheduling algorithm. It can be configured to match a specific system under design. Unfortunately, it also requires some means of selecting values for all the parameters to define the best scheduler. Although a multilevel feedback queue is the most general scheme, it is also the most complex.
 
 
