@@ -59,5 +59,40 @@ It is the average number of processes residing in the ready queue waiting for th
 Amount of time it takes from when a request was submitted until the first response is produced. Remember, it is the time till the first response and not the completion of process execution(final response).
 
 In general CPU utilization and Throughput are maximized and other factors are reduced for proper optimization.
+# First Come First Serve Scheduling
+In the "First come first serve" scheduling algorithm, as the name suggests, the process which arrives first, gets executed first, or we can say that the process which requests the CPU first, gets the CPU allocated first.
+
+First Come First Serve, is just like FIFO(First in First out) Queue data structure, where the data element which is added to the queue first, is the one who leaves the queue first.
+This is used in Batch Systems.
+It's easy to understand and implement programmatically, using a Queue data structure, where a new process enters through the tail of the queue, and the scheduler selects process from the head of the queue.
+A perfect real life example of FCFS scheduling is buying tickets at ticket counter.
+
+# Problems with FCFS Scheduling
+Below we have a few shortcomings or problems with the FCFS scheduling algorithm:
+
+It is Non Pre-emptive algorithm, which means the process priority doesn't matter.
+If a process with very least priority is being executed, more like daily routine backup process, which takes more time, and all of a sudden some other high priority process arrives, like interrupt to avoid system crash, the high priority process will have to wait, and hence in this case, the system will crash, just because of improper process scheduling.
+
+Not optimal Average Waiting Time.
+Resources utilization in parallel is not possible, which leads to Convoy Effect, and hence poor resource(CPU, I/O etc) utilization.
+
+# What is Convoy Effect?
+Convoy Effect is a situation where many processes, who need to use a resource for short time are blocked by one process holding that resource for a long time.
+
+This essentially leads to poort utilization of resources and hence poor performance.
+# Shortest Job First(SJF) Scheduling
+Shortest Job First scheduling works on the process with the shortest burst time or duration first.
+
+This is the best approach to minimize waiting time.
+This is used in Batch Systems.
+It is of two types:
+1)Non Pre-emptive
+2)Pre-emptive
+To successfully implement it, the burst time/duration time of the processes should be known to the processor in advance, which is practically not feasible all the time.
+This scheduling algorithm is optimal if all the jobs/processes are available at the same time. (either Arrival time is 0 for all, or Arrival time is same for all)
+# Problem with Non Pre-emptive SJF
+If the arrival time for processes are different, which means all the processes are not available in the ready queue at time 0, and some jobs arrive after some time, in such situation, sometimes process with short burst time have to wait for the current process's execution to finish, because in Non Pre-emptive SJF, on arrival of a process with short duration, the existing job/process's execution is not halted/stopped to execute the short job first.
+
+This leads to the problem of Starvation, where a shorter process has to wait for a long time until the current longer process gets executed. This happens if shorter jobs keep coming, but this can be solved using the concept of aging.
 
 
